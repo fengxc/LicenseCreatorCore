@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Base64;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -38,16 +39,18 @@ public class Main {
                 License license = new ExampleLicense().getExample();
                 String exm = JacksonUtils.toJSONString(license);
 
-                FileOutputStream c = new FileOutputStream("D:\\licenseConfig.txt");
-                c.write(exm.getBytes(Charset.forName("UTF-8")));
-                c.close();
+                printToFile("D:\\licenseConfig.txt", exm.getBytes(Charset.forName("UTF-8")));
                 license.setMacAddress(info1.getMacAddressList());
+                license.setCreateDate(new Date());
                 String licenseJson  = JacksonUtils.toJSONString(license);
                 System.out.println(licenseJson);
+
+                printToFile("D:\\licenseInfo.txt",  licenseJson.getBytes(Charset.forName("UTF-8")));
+
                 String license64 = Base64Util.encode(licenseJson, Charset.forName("UTF-8"));
                 System.out.println(license64);
                 if (license64.getBytes(Charset.forName("UTF-8")).length > 200) {
-                    FileOutputStream fos = new FileOutputStream("D:\\out.txt");
+                    FileOutputStream fos = new FileOutputStream("D:\\license.txt");
                     byte[] license64Byte = license64.getBytes(Charset.forName("UTF-8"));
                     int len = license64Byte.length;
                     int i = 0;
@@ -71,11 +74,15 @@ public class Main {
                     fos.close();
                 }else {
                     String rsaResultString = RsaUtil.rsaEncrypt(RsaKey.PRIVATE_KEY, license64, "privateKey");
-                    FileOutputStream fos = new FileOutputStream("D:\\out.txt");
-                    fos.write(rsaResultString.getBytes());
-                    fos.close();
+                    printToFile("D:\\out.txt", rsaResultString.getBytes());
                 }
             }
         }
+    }
+
+    private static void printToFile(String name, byte[] exm) throws IOException {
+        FileOutputStream c = new FileOutputStream(name);
+        c.write(exm);
+        c.close();
     }
 }

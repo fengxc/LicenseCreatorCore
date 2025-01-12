@@ -22,6 +22,7 @@ public class ExampleLicense {
             throw new RuntimeException(e);
         }
         license.setDescription("Example license");
+        license.setType(License.LicenseType.GA);
         List<String> list = List.of(modules);
 
         license.setModule(list);
