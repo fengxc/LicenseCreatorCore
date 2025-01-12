@@ -1,0 +1,1 @@
+{"description":"Example license","startDate":"2025-01-01 00:00:00","endDate":"2025-05-31 00:00:00","type":"GA","validMode":"single","module":["sys","biz","auth","dev","gen","mobile","pm","sp","sec","mt","cm","flow","netdisk","rdm","train"]}

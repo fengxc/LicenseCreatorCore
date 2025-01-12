@@ -1,0 +1,1 @@
+{"description":"DEV license","startDate":"2025-01-01 00:00:00","endDate":"2026-05-31 00:00:00","type":"DEV","validMode":"single"}

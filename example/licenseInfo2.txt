@@ -1,0 +1,1 @@
+{"description":"DEMO license","macAddress":["00-FF-62-0E-15-36","9C-6B-00-14-D1-DF"],"startDate":"2025-01-01 00:00:00","endDate":"2026-05-31 00:00:00","createDate":"2025-01-12 18:37:22","type":"DEMO","module":["sys","biz","auth","dev","gen","mobile","pm","sp","sec","mt","cm","flow","netdisk","rdm","train"]}

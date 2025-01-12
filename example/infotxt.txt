@@ -1,0 +1,1 @@
+{"cpuSerial":"178BFBFF00870F10","mainBoardSerial":"M80-G3002100106","macAddressList":["00-FF-62-0E-15-36","9C-6B-00-14-D1-DF"]}

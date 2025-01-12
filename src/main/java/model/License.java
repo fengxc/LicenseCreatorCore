@@ -47,7 +47,13 @@ public class License {
 
     private String description;
 
+    private String cpuSerial;
+
+    private String mainBoardSerial;
+
     private List<String> macAddress;
+
+    private String validMode;
 
     private Date startDate;
 
