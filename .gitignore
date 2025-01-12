@@ -36,4 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/.idea/vcs.xml
+/out/artifacts/LicenseCreatorCore_jar/LicenseCreatorCore.jar
