@@ -47,6 +47,8 @@ public class License {
 
     private String description;
 
+    private String version;
+
     private String cpuSerial;
 
     private String mainBoardSerial;

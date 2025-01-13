@@ -8,19 +8,21 @@ import util.JacksonUtils;
 import util.RsaKey;
 import util.RsaUtil;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Date;
 
 public class Main {
 
-    public static String OUT_LICENSE_FILE_NAME = "license.txt";
+    public static String OUT_LICENSE_FILE_NAME = "out.txt";
     public static String OUT_LICENSE_INFO_FILE_NAME = "licenseInfo.txt";
-    public static String IN_USER_INFO = "info.txt";
+    public static String IN_USER_INFO = "userinfo.txt";
     public static String IN_LICENSE_CONFIG = "licenseConfig.txt";
+//
+//    public static String OUT_LICENSE_FILE_NAME = "/home/xiaochen/license/out.txt";
+//    public static String OUT_LICENSE_INFO_FILE_NAME = "/home/xiaochen/license/licenseInfo.txt";
+//    public static String IN_USER_INFO = "/home/xiaochen/license/ppp.txt";
+//    public static String IN_LICENSE_CONFIG = "/home/xiaochen/license/licenseConfig.txt";
 
     public static void main(String[] args) throws Exception {
         int argLength = args.length;
@@ -46,18 +48,18 @@ public class Main {
 
         String str = null;
         if (infoBase64) {
-            String base64 = readFile(IN_USER_INFO);
+            String base64 = read64File(IN_USER_INFO);
             byte[] bytes = Base64Util.decode(base64.getBytes("UTF-8"));
             str = new String(bytes, "UTF-8");
         }else {
-            str =readFile(IN_USER_INFO);
+            str =readTxtFile(IN_USER_INFO);
         }
         System.out.println(str);
         SystemInfo info1 = JacksonUtils.toJavaObject(str, SystemInfo.class);
         if (info1.getMacAddressList() != null) {
             info1.getMacAddressList().forEach(System.out::println);
         }
-        String licenseConfigJson = readFile(IN_LICENSE_CONFIG);
+        String licenseConfigJson = readTxtFile(IN_LICENSE_CONFIG);
         License license = JacksonUtils.toJavaObject(licenseConfigJson, License.class);
 //        License license = new ExampleLicense().getExample();
 //        String exm = JacksonUtils.toJSONString(license);
@@ -103,6 +105,21 @@ public class Main {
         }
     }
 
+    private static String read64File(String filePath) throws IOException {
+        File userInfoFile = new File(filePath);
+        FileInputStream fis = new FileInputStream(userInfoFile);
+        StringBuilder sb = new StringBuilder();
+        int temp = 0;
+        //当temp等于-1时，表示已经到了文件结尾，停止读取
+        while ((temp = fis.read()) != -1) {
+            if (temp!=10&&temp!=13) {
+                sb.append((char) temp);
+            }
+        }
+        String base64 = sb.toString();
+        return base64;
+    }
+
     private static String readFile(String filePath) throws IOException {
         File userInfoFile = new File(filePath);
         FileInputStream fis = new FileInputStream(userInfoFile);
@@ -114,6 +131,19 @@ public class Main {
         }
         String base64 = sb.toString();
         return base64;
+    }
+
+
+    private static String readTxtFile(String filePath) throws IOException {
+        File userInfoFile = new File(filePath);
+        FileInputStream fis = new FileInputStream(userInfoFile);
+        InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+        char[] buffer = new char[1024];
+        String result = "";
+        while (isr.read(buffer)>0){
+            result += new String(buffer);
+        }
+        return result;
     }
 
     private static void printToFile(String name, byte[] exm) throws IOException {
