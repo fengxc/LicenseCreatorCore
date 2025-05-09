@@ -1,10 +1,9 @@
 package util;
 
 import javax.crypto.Cipher;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
@@ -14,6 +13,7 @@ import java.util.Map;
 public class RsaUtil {
     public static final String KEY_TYPE_PRIVATE_KEY = "privateKey";
     public static final String KEY_TYPE_PUBLIC_KEY = "publicKey";
+    public static final String KEY = "Key";
 
     /**
      * 生成公钥和私钥
@@ -89,4 +89,6 @@ public class RsaUtil {
 //        System.out.println("公钥加密：" + publicKeyData);
 //        System.out.println("私钥解密：" + rsaDecrypt(keyMap.get(KEY_TYPE_PRIVATE_KEY), publicKeyData, KEY_TYPE_PRIVATE_KEY));
     }
+
+
 }
