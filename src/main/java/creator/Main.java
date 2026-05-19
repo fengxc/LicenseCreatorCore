@@ -88,7 +88,7 @@ public class Main {
                 String rsaResultString = RsaUtil.rsaEncrypt(RsaKey.PRIVATE_KEY, copy, "privateKey");
                 System.out.println(count + ": " + rsaResultString);
                 fos.write(rsaResultString.getBytes());
-                fos.write("\n".getBytes());
+                fos.write("||||".getBytes());
                 count++;
                 i += 200;
             }
